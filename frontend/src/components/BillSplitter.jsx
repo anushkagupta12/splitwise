@@ -194,23 +194,44 @@ function BalanceCard({ person, balance }) {
   );
 }
 
-function SettlementRow({ transaction }) {
+// function SettlementRow({ transaction }) {
+//   return (
+//     <div className="flex items-center gap-2 border-t border-gray-100 pt-2 text-sm">
+//       <span className="font-medium text-gray-900">{transaction.from}</span>
+//       <svg
+//         className="h-3.5 w-3.5 text-gray-400"
+//         fill="none"
+//         viewBox="0 0 24 24"
+//         stroke="currentColor"
+//         strokeWidth={2}
+//       >
+//         <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+//       </svg>
+//       <span className="font-medium text-gray-900">{transaction.to}</span>
+//       <span className="ml-auto text-gray-500">
+//         {formatCurrency(transaction.amount)}
+//       </span>
+//     </div>
+//   );
+// }
+ function SettlementRow({ transaction }) {
+  if (!transaction.to) {
+    return (
+      <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+        <span className="font-semibold">
+          {transaction.from}
+        </span>{" "}
+        owes nobody (Even)
+      </div>
+    );
+  }
+
   return (
-    <div className="flex items-center gap-2 border-t border-gray-100 pt-2 text-sm">
-      <span className="font-medium text-gray-900">{transaction.from}</span>
-      <svg
-        className="h-3.5 w-3.5 text-gray-400"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
-      <span className="font-medium text-gray-900">{transaction.to}</span>
-      <span className="ml-auto text-gray-500">
-        {formatCurrency(transaction.amount)}
-      </span>
+    <div className="p-3 rounded-lg bg-yellow-50 border border-yellow-200">
+      <span className="font-semibold">{transaction.from}</span>{" "}
+      owes{" "}
+      <span className="font-semibold">{transaction.to}</span>{" "}
+      ₹{transaction.amount.toFixed(2)}
     </div>
   );
 }
